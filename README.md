@@ -1,12 +1,4 @@
-Berikut adalah versi yang lebih rapi dari file `README.md` Anda:
-
----
-
-# Blog Premium dengan Node.js dan PostgreSQL
-
-Aplikasi blog ini memungkinkan pengguna untuk membuat, membaca, dan berkomentar pada postingan. Fitur premium tersedia bagi pengguna berlangganan, memungkinkan mereka untuk mengakses konten khusus.
-
-## Struktur Tabel
+# Struktur Tabel
 
 ### 1. Tabel `users`
 
