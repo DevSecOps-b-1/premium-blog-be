@@ -1,7 +1,7 @@
 const pool = require("../database/db");
 
 // Add Comment
-module.exports.addComment = async (postId, userId, commentText) => {
+const addComment = async (postId, userId, commentText) => {
   try {
     const query = `
             INSERT INTO comments (post_id, user_id, comment_text)
@@ -17,7 +17,7 @@ module.exports.addComment = async (postId, userId, commentText) => {
 };
 
 // Get user information by ID or email
-module.exports.getUser = async (identifier) => {
+const getUser = async (identifier) => {
   try {
     let query;
     let values;
@@ -38,3 +38,5 @@ module.exports.getUser = async (identifier) => {
     console.log(error);
   }
 };
+
+module.exports = { getUser, addComment };

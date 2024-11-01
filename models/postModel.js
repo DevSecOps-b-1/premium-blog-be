@@ -1,7 +1,7 @@
 const pool = require("../database/db");
 
 // Get Post List
-module.exports.getPostList = async (isPremiumUser) => {
+const getPostList = async (isPremiumUser) => {
   try {
     const query = `
           SELECT id, title, content, created_at 
@@ -18,7 +18,7 @@ module.exports.getPostList = async (isPremiumUser) => {
 };
 
 // View Single Post
-module.exports.viewSinglePost = async (postId, isPremiumUser) => {
+const viewSinglePost = async (postId, isPremiumUser) => {
   try {
     const query = `
             SELECT id, title, content, created_at 
@@ -35,7 +35,7 @@ module.exports.viewSinglePost = async (postId, isPremiumUser) => {
 };
 
 // Get Comments from Post
-module.exports.getComments = async (postId) => {
+const getComments = async (postId) => {
   try {
     const query = `
           SELECT c.id, c.comment_text, c.created_at, u.username 
@@ -51,3 +51,5 @@ module.exports.getComments = async (postId) => {
     console.log(error);
   }
 };
+
+module.exports = { getPostList, viewSinglePost, getComments };
