@@ -2,7 +2,12 @@
 const express = require("express");
 const http = require("http");
 const { createTables } = require("./database/createTables");
-const { addPost } = require("./models/authorModel");
+const {
+  addPost,
+  editPost,
+  deletePost,
+  updateUserSubscription,
+} = require("./models/authorModel");
 const { createAuthorUser } = require("./database/createAuthor");
 
 // instantiation
@@ -18,17 +23,39 @@ app.get("/", async (req, res) => {
   res.send("Tables created!");
 });
 
-app.get("/create-author", async (req, res) => {
+// =============AUTHOR================
+// create author
+app.post("/create-author", async (req, res) => {
   const { username, email, password } = req.body;
   const result = await createAuthorUser(username, email, password);
   res.send(result);
 });
 
-app.get("/add-post", async (req, res) => {
+// add post
+app.post("/add-post", async (req, res) => {
   const { title, content, isPremium } = req.body;
   const result = await addPost(title, content, isPremium);
   res.send(result);
-  res.send("Add post successfull");
+});
+
+// edit post
+app.post("/edit-post", async (req, res) => {
+  const { postId, title, content, isPremium } = req.body;
+  const result = await editPost(postId, title, content, isPremium);
+  res.send(result);
+});
+
+// delete post
+app.post("/delete-post", async (req, res) => {
+  const { postId } = req.body;
+  const result = await deletePost(postId);
+  res.send(result);
+});
+
+app.post("/update-user-subscribtion", async (req, res) => {
+  const { userId, isPremium } = req.body;
+  const result = await updateUserSubscription(userId, isPremium);
+  res.send(result);
 });
 
 createTables()
