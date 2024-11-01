@@ -26,7 +26,7 @@
 
 ---
 
-## Fungsi-Fungsi dalam Model
+## Fungsi-Fungsi dalam Model (di direktori "models" tinggal panggil aja)
 
 ### Author
 
@@ -54,7 +54,7 @@
 
 ---
 
-## Cara Menggunakan Project
+## Cara Pakai
 
 1. **Instalasi Dependensi**
 
@@ -80,7 +80,7 @@
    ```bash
    npm start
    ```
-   Aplikasi akan otomatis membuat tabel jika belum ada, karena fungsi `createTables()` akan dieksekusi di `index.js`.
+   Aplikasi akan otomatis membuat tabel jika belum ada, karena fungsi `createTables()` akan dieksekusi di `index.js` kalau gagal connect nanti nggak jalan servernya.
 
 ---
 
