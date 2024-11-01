@@ -23,7 +23,7 @@ app.get("/", async (req, res) => {
   res.send("Tables created!");
 });
 
-// =============AUTHOR================
+// =============TES AUTHOR================
 // create author
 app.post("/create-author", async (req, res) => {
   const { username, email, password } = req.body;

@@ -1,13 +1,10 @@
 const pool = require("../database/db");
 
 // Get Post List
-const getPostList = async (isPremiumUser) => {
+const getPostList = async () => {
   try {
     const query = `
-          SELECT id, title, content, created_at 
-          FROM posts 
-          WHERE is_premium = FALSE 
-             OR (is_premium = TRUE AND ${isPremiumUser} = TRUE);
+          SELECT * FROM posts
         `;
     const result = await pool.query(query);
     return result.rows;

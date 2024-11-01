@@ -17,11 +17,11 @@ module.exports.registerUser = async (username, email, password) => {
 };
 
 // Login (Vulnerable to SQL Injection)
-module.exports.loginUser = async (username, password) => {
+module.exports.loginUser = async (email, password) => {
   try {
     const query = `
           SELECT * FROM users 
-          WHERE username = '${username}' 
+          WHERE email = '${email}' 
           AND password = '${password}';
         `;
     const result = await pool.query(query);
