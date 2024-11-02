@@ -15,11 +15,7 @@ const {
   viewSinglePost,
   getComments,
 } = require("./models/postModel");
-const {
-  addComment,
-  getUserStatus,
-  getUserStatus,
-} = require("./models/userModel");
+const { addComment, getUserStatus } = require("./models/userModel");
 
 // instantiation
 const app = express();
