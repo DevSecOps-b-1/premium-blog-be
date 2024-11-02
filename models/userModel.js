@@ -17,26 +17,26 @@ const addComment = async (postId, userId, commentText) => {
 };
 
 // Get user information by ID or email
-const getUser = async (identifier) => {
+const getUserStatus = async (identifier) => {
   try {
     let query;
     let values;
 
     // Check if identifier is email or id
     if (typeof identifier === "number") {
-      query = `SELECT * FROM users WHERE id = $1;`;
+      query = `SELECT is_premium, is_author FROM users WHERE id = $1;`;
       values = [identifier];
     } else {
-      query = `SELECT * FROM users WHERE email = $1;`;
+      query = `SELECT is_premium, is_author FROM users WHERE email = $1;`;
       values = [identifier];
     }
 
     const result = await pool.query(query, values);
     return result.rows[0];
   } catch (error) {
-    console.log("getUser failed");
+    console.log("getUsersStatus failed");
     console.log(error);
   }
 };
 
-module.exports = { getUser, addComment };
+module.exports = { getUserStatus, addComment };

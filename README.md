@@ -50,7 +50,7 @@
 ### User
 
 - **Menambah komentar pada postingan**: `addComment(postId, userId, commentText)`
-- **Mendapatkan profil pengguna**: `getUser(identifier)` - (`identifier` bisa berupa email atau ID)
+- **Mendapatkan status premium pengguna**: `getUserStatus(identifier)` - (`identifier` bisa berupa email atau ID)
 
 ---
 

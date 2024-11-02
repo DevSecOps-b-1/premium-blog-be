@@ -6,7 +6,7 @@ module.exports.registerUser = async (username, email, password) => {
     const query = `
           INSERT INTO users (username, email, password, is_premium)
           VALUES ($1, $2, $3, FALSE)
-          RETURNING id;
+          RETURNING id, username, email;
         `;
     const result = await pool.query(query, [username, email, password]);
     return result.rows[0];
@@ -20,14 +20,14 @@ module.exports.registerUser = async (username, email, password) => {
 module.exports.loginUser = async (email, password) => {
   try {
     const query = `
-          SELECT * FROM users 
+          SELECT id, username, email FROM users 
           WHERE email = '${email}' 
           AND password = '${password}';
         `;
     const result = await pool.query(query);
     return result.rows[0];
   } catch (error) {
-    console.log("login failed");
+    console.log("failed to loggging in user");
     console.log(error);
   }
 };
