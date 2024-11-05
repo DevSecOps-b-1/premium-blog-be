@@ -31,6 +31,17 @@
 ### Author
 
 - **Membuat akun author baru**: `createAuthorUser(username, email, password)`
+  - **Response**:
+    ```json
+    {
+      "status": "success",
+      "data": {
+        "id": "number",
+        "username": "string",
+        "is_author": true
+      }
+    }
+    ```
 - **Menambah postingan**: `addPost(title, content, isPremium)`
 - **Mengedit postingan**: `editPost(postId, title, content, isPremium)`
 - **Menghapus postingan**: `deletePost(postId)`
