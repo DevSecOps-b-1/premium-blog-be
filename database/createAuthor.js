@@ -5,7 +5,7 @@ async function createAuthorUser(username, email, password) {
   const insertAuthorUserQuery = `
     INSERT INTO users (username, email, password, is_premium, is_author)
     VALUES ($1, $2, $3, $4, $5)
-    RETURNING *;
+    RETURNING id, username, email, is_author;
   `;
 
   const values = [username, email, password, true, true]; // is_premium: false, is_author: true

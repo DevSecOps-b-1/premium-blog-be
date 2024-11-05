@@ -31,6 +31,106 @@
 ### Author
 
 - **Membuat akun author baru**: `createAuthorUser(username, email, password)`
+  - **Request**:
+    ```json
+    {
+      "username": "string",
+      "email": "string",
+      "password": "string"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "id": "number",
+      "username": "string",
+      "email": "string",
+      "is_author": true
+    }
+    ```
+- **Menambah postingan**: `addPost(title, content, isPremium)`
+  - **Request**:
+    ```json
+    {
+      "title": "string",
+      "content": "string",
+      "isPremium": "boolean"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "id": "number",
+      "title": "string",
+      "content": "string",
+      "is_premium": "boolean",
+      "created_at": "timestamp"
+    }
+    ```
+- **Mengedit postingan**: `editPost(postId, title, content, isPremium)`
+
+  - **Request**:
+    ```json
+    {
+      "postId": "number",
+      "title": "string",
+      "content": "string",
+      "isPremium": "boolean"
+    }
+    ```
+  - **Response**:
+
+    ```json
+    {
+      "id": "number",
+      "title": "string",
+      "content": "string",
+      "is_premium": "boolean",
+      "created_at": "timestamp"
+    }
+    ```
+
+- **Menghapus postingan**: `deletePost(postId)`
+  - **Request**:
+    ```json
+    {
+      "postId": "number"
+    }
+    ```
+  - **Response**:
+    ```
+      boolean
+    ```
+- **Mengupdate langganan pengguna**: `updateUserSubscription(userId, isPremium)`
+  - **Request**:
+    ```json
+    {
+      "userId": "number",
+      "isPremium": "boolean"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "status": "success",
+      "data": {
+        "id": "number",
+        "is_premium": "boolean"
+      }
+    }
+    ```
+
+### Authentication
+
+- **Registrasi**: `registerUser(username, email, password)`
+  - **Request**:
+    ```json
+    {
+      "username": "string",
+      "email": "string",
+      "password": "string"
+    }
+    ```
   - **Response**:
     ```json
     {
@@ -38,30 +138,133 @@
       "data": {
         "id": "number",
         "username": "string",
-        "is_author": true
+        "email": "string"
       }
     }
     ```
-- **Menambah postingan**: `addPost(title, content, isPremium)`
-- **Mengedit postingan**: `editPost(postId, title, content, isPremium)`
-- **Menghapus postingan**: `deletePost(postId)`
-- **Mengupdate langganan pengguna**: `updateUserSubscription(userId, isPremium)`
-
-### Authentication
-
-- **Registrasi**: `registerUser(username, email, password)`
 - **Login**: `loginUser(email, password)`
+  - **Request**:
+    ```json
+    {
+      "email": "string",
+      "password": "string"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "status": "success",
+      "data": {
+        "id": "number",
+        "username": "string",
+        "is_premium": "boolean",
+        "is_author": "boolean"
+      }
+    }
+    ```
 
 ### Post
 
 - **Mendapatkan daftar semua postingan**: `getPostList()`
+  - **Response**:
+    ```json
+    {
+      "status": "success",
+      "data": [
+        {
+          "id": "number",
+          "title": "string",
+          "content": "string",
+          "is_premium": "boolean",
+          "created_at": "timestamp"
+        }
+      ]
+    }
+    ```
 - **Mendapatkan detail satu postingan**: `viewSinglePost(postId, isPremiumUser)`
+  - **Request**:
+  ```json
+  {
+    "postId": "number",
+    "isPremiumUser": "boolean"
+  }
+  ```
+  - **Response**:
+    ```json
+    {
+      "status": "success",
+      "data": {
+        "id": "number",
+        "title": "string",
+        "content": "string",
+        "is_premium": "boolean",
+        "created_at": "timestamp"
+      }
+    }
+    ```
 - **Mendapatkan komentar pada postingan tertentu**: `getComments(postId)`
+  - **Request**:
+    ```json
+    {
+      "postId": "number"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "status": "success",
+      "data": [
+        {
+          "id": "number",
+          "user_id": "number",
+          "comment_text": "string",
+          "created_at": "timestamp"
+        }
+      ]
+    }
+    ```
 
 ### User
 
 - **Menambah komentar pada postingan**: `addComment(postId, userId, commentText)`
+  - **Request**:
+    ```json
+    {
+      "postId": "number",
+      "userId": "number",
+      "commentText": "string"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "status": "success",
+      "data": {
+        "id": "number",
+        "post_id": "number",
+        "user_id": "number",
+        "comment_text": "string",
+        "created_at": "timestamp"
+      }
+    }
+    ```
 - **Mendapatkan status premium pengguna**: `getUserStatus(identifier)` - (`identifier` bisa berupa email atau ID)
+  - **Request**:
+    ```json
+    {
+      "identifier": "string"
+    }
+    ```
+  - **Response**:
+    ```json
+    {
+      "status": "success",
+      "data": {
+        "id": "number",
+        "is_premium": "boolean"
+      }
+    }
+    ```
 
 ---
 

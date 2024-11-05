@@ -40,10 +40,12 @@ const deletePost = async (postId) => {
             DELETE FROM posts WHERE id = $1 RETURNING *;
           `;
     const result = await pool.query(query, [postId]);
-    return result.rows[0];
+    console.log("delete successfull");
+    return true;
   } catch (error) {
     console.log("delete post failed");
     console.log(error);
+    return false;
   }
 };
 
