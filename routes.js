@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const { createTables} = require("./models/authorModel");
-const { createAuthorUser } = require("./database/createAuthor");
 const { addComment, getUserStatus } = require("./models/userModel");
 const { addPostController, editPostController, deletePostController, updateUserSubscriptionController } = require("./src/controllers/authorPostController");
 const { registerController, loginController } = require("./src/controllers/authController");
 const { getPostListController, viewSinglePostController, getCommentsController } = require("./src/controllers/postController");
+const { createAuthorUserController } = require("./src/controllers/authorUserController");
 
 // Route to initialize tables
 router.get("/", async (req, res) => {
@@ -14,11 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 // Author routes
-router.post("/create-author", async (req, res) => {
-  const { username, email, password } = req.body;
-  const result = await createAuthorUser(username, email, password);
-  res.send(result);
-});
+router.post("/create-author", createAuthorUserController);
 
 router.post("/add-post", addPostController);
 router.post("/edit-post", editPostController);
