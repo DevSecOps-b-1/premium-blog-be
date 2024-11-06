@@ -1,4 +1,4 @@
-const pool = require("../database/db");
+const pool = require("./db");
 
 // Add a new post
 const addPost = async (title, content, isPremium = false) => {

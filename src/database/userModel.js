@@ -1,4 +1,4 @@
-const pool = require("../database/db");
+const pool = require("./db");
 
 // Add Comment
 const addComment = async (postId, userId, commentText) => {

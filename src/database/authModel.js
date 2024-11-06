@@ -1,4 +1,4 @@
-const pool = require("../database/db");
+const pool = require("./db");
 
 // Register User
 module.exports.registerUser = async (username, email, password) => {
@@ -13,6 +13,7 @@ module.exports.registerUser = async (username, email, password) => {
   } catch (error) {
     console.log("register failed");
     console.log(error);
+    return error;
   }
 };
 
@@ -29,5 +30,6 @@ module.exports.loginUser = async (email, password) => {
   } catch (error) {
     console.log("failed to loggging in user");
     console.log(error);
+    return error;
   }
 };
