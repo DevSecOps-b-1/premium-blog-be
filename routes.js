@@ -1,16 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const { createTables} = require("./models/authorModel");
-const { addComment, getUserStatus } = require("./models/userModel");
+const { createTables} = require("./src/database/authorModel");
+const { addComment, getUserStatus } = require("./src/database/userModel");
 const { addPostController, editPostController, deletePostController, updateUserSubscriptionController } = require("./src/controllers/authorPostController");
 const { registerController, loginController } = require("./src/controllers/authController");
 const { getPostListController, viewSinglePostController, getCommentsController } = require("./src/controllers/postController");
 const { createAuthorUserController } = require("./src/controllers/authorUserController");
+const { sendSuccess } = require("./src/utils/server/send");
 
 // Route to initialize tables
 router.get("/", async (req, res) => {
   await createTables();
   res.send("Tables created!");
+});
+
+// Ping test
+router.get("/ping", async (req, res) => {
+  return sendSuccess(res, 200, { message: "pong" });
 });
 
 // Author routes

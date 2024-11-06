@@ -9,7 +9,7 @@ app.use(express.json());
 
 app.use("/", router);
 
-const { createTables } = require("./database/createTables");
+const { createTables } = require("./src/database/createTables");
 createTables()
   .then(() => {
     const PORT = 3001;
