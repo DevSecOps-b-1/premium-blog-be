@@ -1,3 +1,6 @@
+const { sendSuccess, sendError } = require("../utils/server/send");
+const { addPost, editPost, deletePost, updateUserSubscription } = require("../database/authorModel");
+
 const addPostController = async (req, res) => {
   try {
     const { title, content, isPremium } = req.body;

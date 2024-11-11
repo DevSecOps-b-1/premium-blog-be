@@ -1,5 +1,6 @@
 // create the controller functions based on the index.js file
 const { sendSuccess, sendError } = require("../utils/server/send");
+const { getPostList, viewSinglePost, getComments } = require("../database/postModel");
 
 // get all posts
 const getPostListController = async (req, res) => {
