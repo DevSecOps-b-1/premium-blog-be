@@ -1,0 +1,38 @@
+services:
+  db:
+    image: postgres:17.1-alpine
+    container_name: db
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD_FILE=/run/secrets/PG_DB_PASSWORD_FILE
+      - POSTGRES_DB=postgres
+    volumes:
+      - db:/var/lib/postgresql/data
+    secrets:
+      - PG_DB_PASSWORD_FILE
+
+  app:
+    build: .
+    container_name: app
+    restart: always
+    ports:
+      - 3001:3001
+    depends_on:
+      - db
+    environment:
+      - PG_DB_USER=postgres
+      - PG_DB_PASSWORD_FILE=/run/secrets/PG_DB_PASSWORD_FILE
+      - PG_DB_HOST=db
+      - PG_DB_NAME=postgres
+    secrets:
+      - PG_DB_PASSWORD_FILE
+    depends_on:
+      - db
+
+volumes:
+  db:
+
+secrets:
+  PG_DB_PASSWORD_FILE:
+    external: true
