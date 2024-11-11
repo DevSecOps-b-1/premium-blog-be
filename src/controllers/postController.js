@@ -31,7 +31,6 @@ const viewSinglePostController = async (req, res) => {
 const getCommentsController = async (req, res) => {
   try {
     const { postId } = req.body;
-    console.log(postId);
     const result = await getComments(postId);
     return sendSuccess(res, 200, result);
   } catch (error) {

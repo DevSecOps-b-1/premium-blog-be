@@ -55,7 +55,7 @@ const updateUserSubscription = async (userId, isPremium) => {
     const query = `
             UPDATE users
             SET is_premium = $1
-            WHERE id = $2 RETURNING *;
+            WHERE id = $2;
           `;
     const result = await pool.query(query, [isPremium, userId]);
     return result.rows[0];
