@@ -3,7 +3,7 @@ const { sendSuccess, sendError } = require("../utils/server/send");
 const { getPostList, viewSinglePost, getComments } = require("../database/postModel");
 
 // get all posts
-const getPostListController = async (req, res) => {
+const getPostListController = async (_, res) => {
   try {
     const result = await getPostList();
     return sendSuccess(res, 200, result);

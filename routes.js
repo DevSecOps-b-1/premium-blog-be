@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { createTables} = require("./src/database/authorModel");
 const { getUserStatus } = require("./src/database/userModel");
-const { addPostController, editPostController, deletePostController, updateUserSubscriptionController } = require("./src/controllers/authorPostController");
+const { addPostController, editPostController, deletePostController } = require("./src/controllers/authorPostController");
+const { buyPremiumController } = require("./src/controllers/subscriptionController");
 const { registerController, loginController } = require("./src/controllers/authController");
 const { getPostListController, viewSinglePostController, getCommentsController } = require("./src/controllers/postController");
 const { createAuthorUserController } = require("./src/controllers/authorUserController");
@@ -26,7 +27,7 @@ router.post("/create-author", createAuthorUserController);
 router.post("/add-post", addPostController);
 router.post("/edit-post", editPostController);
 router.post("/delete-post", deletePostController);
-router.post("/update-user-subscription", updateUserSubscriptionController);
+router.post("/user-buy-premium", buyPremiumController);
 
 // Authentication routes
 router.post("/register", registerController);
