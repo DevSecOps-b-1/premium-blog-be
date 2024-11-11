@@ -26,7 +26,7 @@ const viewSinglePostController = async (req, res) => {
 // get comments
 const getCommentsController = async (req, res) => {
   try {
-    const { postId } = req.body;
+    const { postId } = req.query;
     const result = await getComments(postId);
     return sendSuccess(res, 200, result);
   } catch (error) {
