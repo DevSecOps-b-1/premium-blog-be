@@ -18,7 +18,7 @@ const getPostList = async () => {
 const viewSinglePost = async (postId, isPremiumUser) => {
   try {
     const query = `
-            SELECT id, title, content, created_at 
+            SELECT * 
             FROM posts 
             WHERE id = $1 
               AND (is_premium = FALSE OR (is_premium = TRUE AND $2 = TRUE));
