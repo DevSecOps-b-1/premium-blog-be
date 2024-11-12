@@ -2,16 +2,16 @@
 const { addComment, getUserStatus } = require("../database/userModel");
 const { sendSuccess } = require("../utils/server/send");
 
-const addComment = async (req, res) => {
+const addCommentController = async (req, res) => {
   const { postId, userId, commentText } = req.body;
   const result = await addComment(postId, userId, commentText);
   return sendSuccess(res, 200, result);
 };
 
-const getUserStatus = async (req, res) => {
+const getUserStatusController = async (req, res) => {
   const { identifier } = req.body;
   const result = await getUserStatus(identifier);
   return sendSuccess(res, 200, result);
 };
 
-module.exports = { addComment, getUserStatus };
+module.exports = { addCommentController, getUserStatusController };
