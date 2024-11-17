@@ -21,14 +21,14 @@ module.exports.registerUser = async (username, email, password) => {
 module.exports.loginUser = async (email, password) => {
   try {
     const query = `
-          SELECT id, username, email FROM users 
+          SELECT id, username, email, password FROM users 
           WHERE email = '${email}' 
           AND password = '${password}';
         `;
     const result = await pool.query(query);
-    return result.rows[0];
+    return result.rows;
   } catch (error) {
-    console.log("failed to loggging in user");
+    console.log("Failed to querying database");
     console.log(error);
     return error;
   }

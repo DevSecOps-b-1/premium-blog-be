@@ -15,6 +15,10 @@ const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
     const result = await loginUser(email, password);
+    
+    if (!result || result.length <= 0) {
+      throw new Error("Invalid email or password");
+    }
     return sendSuccess(res, 200, result);
   } catch (error) {
     return sendError(res, 400, error.message);
