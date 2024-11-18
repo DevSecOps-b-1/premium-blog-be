@@ -8,7 +8,7 @@ const server = http.createServer(app);
 
 // Define CORS options
 const corsOptions = {
-  origin: "http://localhost:3000", // Allow only this origin
+  origin: "*", // Allow this origin. OWASP top ten
   methods: ["GET", "POST", "PUT", "DELETE"], // Allow specific HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
   credentials: true,
