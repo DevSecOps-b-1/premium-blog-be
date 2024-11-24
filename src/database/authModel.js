@@ -17,16 +17,16 @@ module.exports.registerUser = async (username, email, password) => {
   }
 };
 
-// Login (Vulnerable to SQL Injection)
+// Login (SQL Injection Fixed)
 module.exports.loginUser = async (email, password) => {
   try {
     const query = `
           SELECT id, username, email, password FROM users 
-          WHERE email = '${email}' 
-          AND password = '${password}';
+          WHERE email = $1 
+          AND password = $2;
         `;
-    const result = await pool.query(query);
-    return result.rows;
+    const result = await pool.query(query, [email, password]);
+    return result.rows[0];
   } catch (error) {
     console.log("Failed to querying database");
     console.log(error);
