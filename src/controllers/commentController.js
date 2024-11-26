@@ -13,5 +13,5 @@ const addCommentController = async (req, res) => {
 };
 
 module.exports = {
-  addCommentController
+  addCommentController,
 };

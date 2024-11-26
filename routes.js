@@ -1,14 +1,29 @@
 const express = require("express");
 const router = express.Router();
-const { createTables} = require("./src/database/authorModel");
-const { getUserStatus } = require("./src/database/userModel");
-const { addPostController, editPostController, deletePostController } = require("./src/controllers/authorPostController");
-const { buyPremiumController } = require("./src/controllers/subscriptionController");
-const { registerController, loginController } = require("./src/controllers/authController");
-const { getPostListController, viewSinglePostController, getCommentsController } = require("./src/controllers/postController");
-const { createAuthorUserController } = require("./src/controllers/authorUserController");
+const { createTables } = require("./src/database/authorModel");
+const {
+  addPostController,
+  editPostController,
+  deletePostController,
+  updateUserSubscriptionController,
+} = require("./src/controllers/authorPostController");
+const {
+  registerController,
+  loginController,
+} = require("./src/controllers/authController");
+const {
+  getPostListController,
+  viewSinglePostController,
+  getCommentsController,
+} = require("./src/controllers/postController");
+const {
+  createAuthorUserController,
+} = require("./src/controllers/authorUserController");
 const { sendSuccess } = require("./src/utils/server/send");
 const { addCommentController } = require("./src/controllers/commentController");
+const {
+  getUserStatusController,
+} = require("./src/controllers/userActivityController");
 
 // Route to initialize tables
 router.get("/", async (req, res) => {
@@ -36,10 +51,10 @@ router.post("/login", loginController);
 // Post routes
 router.get("/get-posts", getPostListController);
 router.post("/view-post", viewSinglePostController);
-router.get("/get-comments", getCommentsController);
+router.post("/get-comments", getCommentsController);
 
 // User routes
 router.post("/add-comment", addCommentController);
-router.post("/get-userstatus", getUserStatus);
+router.post("/get-userstatus", getUserStatusController);
 
 module.exports = router;

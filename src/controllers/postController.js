@@ -1,6 +1,10 @@
 // create the controller functions based on the index.js file
 const { sendSuccess, sendError } = require("../utils/server/send");
-const { getPostList, viewSinglePost, getComments } = require("../database/postModel");
+const {
+  getPostList,
+  viewSinglePost,
+  getComments,
+} = require("../database/postModel");
 
 // get all posts
 const getPostListController = async (_, res) => {
@@ -26,7 +30,7 @@ const viewSinglePostController = async (req, res) => {
 // get comments
 const getCommentsController = async (req, res) => {
   try {
-    const { postId } = req.query;
+    const { postId } = req.body;
     const result = await getComments(postId);
     return sendSuccess(res, 200, result);
   } catch (error) {
@@ -37,5 +41,5 @@ const getCommentsController = async (req, res) => {
 module.exports = {
   getPostListController,
   viewSinglePostController,
-  getCommentsController
+  getCommentsController,
 };
