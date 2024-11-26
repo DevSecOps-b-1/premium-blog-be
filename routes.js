@@ -5,7 +5,7 @@ const {
   addPostController,
   editPostController,
   deletePostController,
-  updateUserSubscriptionController,
+  buyPremiumController,
 } = require("./src/controllers/authorPostController");
 const {
   registerController,
