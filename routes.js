@@ -20,9 +20,9 @@ const {
   createAuthorUserController,
 } = require("./src/controllers/authorUserController");
 const { sendSuccess } = require("./src/utils/server/send");
-const { addCommentController } = require("./src/controllers/commentController");
 const {
   getUserStatusController,
+  addCommentController,
 } = require("./src/controllers/userActivityController");
 
 // Route to initialize tables
