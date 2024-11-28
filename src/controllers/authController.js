@@ -2,6 +2,7 @@ const { sendSuccess, sendError } = require("../utils/server/send");
 const { registerUser, loginUser } = require("../database/authModel");
 const bcrypt = require("bcrypt");
 const { encryptPassword } = require("../utils/encryption/bcrypt");
+const { generateToken } = require("../utils/encryption/jwt");
 
 const registerController = async (req, res) => {
   try {
@@ -33,7 +34,9 @@ const loginController = async (req, res) => {
     if (!valid_pass) {
       throw new Error("Invalid email or password");
     }
-    return sendSuccess(res, 200, {"id": result.id});
+    return sendSuccess(res, 200, {"token": generateToken({
+      "id": result.id
+    })});
   } catch (error) {
     return sendError(res, 400, error.message);
   }

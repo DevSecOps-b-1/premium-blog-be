@@ -5,6 +5,8 @@ const {
   viewSinglePost,
   getComments,
 } = require("../database/postModel");
+const { getUserStatus } = require("../database/userModel");
+const { verifyToken } = require("../utils/encryption/jwt");
 
 // get all posts
 const getPostListController = async (_, res) => {
@@ -19,11 +21,19 @@ const getPostListController = async (_, res) => {
 // view single post
 const viewSinglePostController = async (req, res) => {
   try {
-    const { postId, isPremiumUser } = req.body;
-    const result = await viewSinglePost(postId, isPremiumUser);
+    const { postId } = req.body;
+    const result = await viewSinglePost(postId);
+
+    // if is premium and user isn't premium by query inside, then throw error
+    const token = req.headers.authorization.split(" ")[1];
+    const { id: userId } = await verifyToken(token);
+    const { is_premium } = await getUserStatus(userId);
+    if (!is_premium) {
+      throw new Error("You need to be premium to view this post.");
+    }
     return sendSuccess(res, 200, result);
   } catch (error) {
-    return sendError(res, 400, error.message);
+    return sendError(res, 403, error.message);
   }
 };
 
