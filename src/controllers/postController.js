@@ -24,13 +24,18 @@ const viewSinglePostController = async (req, res) => {
     const { postId } = req.body;
     const result = await viewSinglePost(postId);
 
-    // if is premium and user isn't premium by query inside, then throw error
-    const token = req.headers.authorization.split(" ")[1];
-    const { id: userId } = await verifyToken(token);
-    const { is_premium } = await getUserStatus(userId);
-    if (!is_premium) {
-      throw new Error("You need to be premium to view this post.");
+    if (result.is_premium) {
+      if (!req.headers.authorization) {
+        throw new Error("Please provide valid token.");
+      }
+      const token = req.headers.authorization.split(" ")[1];
+      const { id: userId } = await verifyToken(token);
+      const { is_premium } = await getUserStatus(userId);
+      if (!is_premium) {
+        throw new Error("You need to be premium to view this post.");
+      }
     }
+    // if is premium and user isn't premium by query inside, then throw error
     return sendSuccess(res, 200, result);
   } catch (error) {
     return sendError(res, 403, error.message);
