@@ -5,8 +5,11 @@ const {
   addPostController,
   editPostController,
   deletePostController,
-  buyPremiumController,
 } = require("./src/controllers/authorPostController");
+
+const {
+  updateUserSubscriptionController,
+} = require("./src/controllers/subscriptionController");
 const {
   registerController,
   loginController,
@@ -42,7 +45,7 @@ router.post("/create-author", createAuthorUserController);
 router.post("/add-post", addPostController);
 router.post("/edit-post", editPostController);
 router.post("/delete-post", deletePostController);
-router.post("/user-buy-premium", buyPremiumController);
+router.post("/update-user-subscription", updateUserSubscriptionController);
 
 // Authentication routes
 router.post("/register", registerController);
