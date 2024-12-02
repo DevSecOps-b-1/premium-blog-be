@@ -30,6 +30,7 @@ const loginController = async (req, res) => {
       userId: result.id,
       email: result.email,
       is_premium: result.is_premium,
+      is_author: result.is_author,
     };
     const token = jwt.sign(payload, secretKey, { expiresIn: "24h" });
 
