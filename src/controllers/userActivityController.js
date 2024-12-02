@@ -5,7 +5,9 @@ const { sendSuccess, sendError } = require("../utils/server/send");
 
 const addCommentController = async (req, res) => {
   try {
-    const { postId, userId, commentText } = req.body;
+    const token = req.headers.authorization.split(" ")[1];
+    const { id: userId } = await verifyToken(token);
+    const { postId, commentText } = req.body;
     const result = await addComment(postId, userId, commentText);
     return sendSuccess(res, 200, result);
   } catch (error) {
