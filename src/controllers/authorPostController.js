@@ -31,19 +31,8 @@ const deletePostController = async (req, res) => {
   }
 };
 
-const updateUserSubscriptionController = async (req, res) => {
-  try {
-    const { userId, isPremium } = req.body;
-    const result = await updateUserSubscription(userId, isPremium);
-    return sendSuccess(res, 200, result);
-  } catch (error) {
-    return sendError(res, 400, error.message);
-  }
-};
-
 module.exports = {
   addPostController,
   editPostController,
-  deletePostController,
-  updateUserSubscriptionController
+  deletePostController
 };

@@ -11,22 +11,19 @@ module.exports.registerUser = async (username, email, password) => {
     const result = await pool.query(query, [username, email, password]);
     return result.rows[0];
   } catch (error) {
-    console.log("register failed");
-    console.log(error);
-    return error;
+    throw error;
   }
 };
 
-// Login (Vulnerable to SQL Injection)
-module.exports.loginUser = async (email, password) => {
+// Login (SQL Injection Fixed)
+module.exports.loginUser = async (email) => {
   try {
     const query = `
           SELECT id, username, email, password FROM users 
-          WHERE email = '${email}' 
-          AND password = '${password}';
+          WHERE email = $1;
         `;
-    const result = await pool.query(query);
-    return result.rows;
+    const result = await pool.query(query, [email]);
+    return result.rows[0];
   } catch (error) {
     console.log("Failed to querying database");
     console.log(error);

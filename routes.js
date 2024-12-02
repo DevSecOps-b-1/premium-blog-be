@@ -5,8 +5,11 @@ const {
   addPostController,
   editPostController,
   deletePostController,
-  updateUserSubscriptionController,
 } = require("./src/controllers/authorPostController");
+
+const {
+  updateUserSubscriptionController,
+} = require("./src/controllers/subscriptionController");
 const {
   registerController,
   loginController,

@@ -14,10 +14,10 @@ const getPostList = async () => {
 };
 
 // View Single Post
-const viewSinglePost = async (postId, isPremiumUser) => {
+const viewSinglePost = async (postId) => {
   try {
-    const query = `SELECT id, title, content, created_at FROM posts WHERE id = $1 AND (is_premium = FALSE OR (is_premium = TRUE AND $2 = TRUE));`;
-    const result = await pool.query(query, [postId, isPremiumUser]);
+    const query = `SELECT id, title, content, created_at, is_premium FROM posts WHERE id = $1;`;
+    const result = await pool.query(query, [postId]);
     return result.rows[0];
   } catch (error) {
     console.log("get single post failed");
