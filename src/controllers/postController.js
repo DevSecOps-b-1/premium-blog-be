@@ -1,5 +1,7 @@
 // create the controller functions based on the index.js file
-const { sendSuccess, sendError } = require("../utils/server/send");
+const { 
+  sendSuccess,
+  sendError } = require("../utils/server/send");
 const {
   getPostList,
   viewSinglePost,
@@ -19,8 +21,19 @@ const getPostListController = async (req, res) => {
 // view single post
 const viewSinglePostController = async (req, res) => {
   try {
-    const { postId, isPremiumUser } = req.body;
-    const result = await viewSinglePost(postId, isPremiumUser);
+    const { postId } = req.body;
+    const { userId, is_premium } = req.user; // from JWT
+
+    if (!postId) {
+      throw new Error("Post ID is required");
+    }
+
+    // Fetch the post based on the user's premium status
+    const result = await viewSinglePost(postId, is_premium);
+    if (!result) {
+      throw new Error("Post not found or unavailable for your access level");
+    }
+
     return sendSuccess(res, 200, result);
   } catch (error) {
     return sendError(res, 400, error.message);

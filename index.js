@@ -2,9 +2,11 @@ const express = require("express");
 const http = require("http");
 const router = require("./routes");
 const cors = require("cors");
+const { authenticateUser } = require("./src/utils/server/authMiddleware");
 
 const app = express();
 const server = http.createServer(app);
+
 
 // Define CORS options
 const corsOptions = {
@@ -18,6 +20,8 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use(express.json());
+
+app.use("/protected", authenticateUser);
 
 app.use("/", router);
 
