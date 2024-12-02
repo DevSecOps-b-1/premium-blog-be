@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const { createTables } = require("./src/database/authorModel");
 const {
   addPostController,
   editPostController,
@@ -27,12 +26,6 @@ const {
   getUserStatusController,
   addCommentController,
 } = require("./src/controllers/userActivityController");
-
-// Route to initialize tables
-router.get("/", async (req, res) => {
-  await createTables();
-  res.send("Tables created!");
-});
 
 // Ping test
 router.get("/ping", async (req, res) => {
