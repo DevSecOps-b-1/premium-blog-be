@@ -1,10 +1,29 @@
+const sanitizeHtml = require("sanitize-html");
 const pool = require("./db");
 
 // Add Comment
+// const addComment = async (postId, userId, commentText) => {
+//   try {
+//     const query = `INSERT INTO comments (post_id, user_id, comment_text) VALUES ($1, $2, $3) RETURNING id;`;
+//     const result = await pool.query(query, [postId, userId, commentText]);
+//     return result.rows[0];
+//   } catch (error) {
+//     console.log("add comment failed");
+//     console.log(error);
+//     throw new Error("add comment failed");
+//   }
+// };
+
 const addComment = async (postId, userId, commentText) => {
   try {
+    // Sanitize the comment text before saving to the database
+    const sanitizedComment = sanitizeHtml(commentText, {
+      allowedTags: [], // Allow no HTML tags
+      allowedAttributes: {}, // Allow no attributes
+    });
+
     const query = `INSERT INTO comments (post_id, user_id, comment_text) VALUES ($1, $2, $3) RETURNING id;`;
-    const result = await pool.query(query, [postId, userId, commentText]);
+    const result = await pool.query(query, [postId, userId, sanitizedComment]);
     return result.rows[0];
   } catch (error) {
     console.log("add comment failed");
