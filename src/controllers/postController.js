@@ -24,6 +24,10 @@ const viewSinglePostController = async (req, res) => {
     const { postId } = req.body;
     const result = await viewSinglePost(postId);
 
+    if (!result) {
+      throw new Error("Post not found.");
+    }
+
     if (result.is_premium) {
       if (!req.headers.authorization) {
         throw new Error("Please provide valid token.");
@@ -38,7 +42,12 @@ const viewSinglePostController = async (req, res) => {
     // if is premium and user isn't premium by query inside, then throw error
     return sendSuccess(res, 200, result);
   } catch (error) {
-    return sendError(res, 403, error.message);
+    switch (error.message) {
+      case "Post not found.":
+        return sendError(res, 404, error.message);
+      case "You need to be premium to view this post.":
+        return sendError(res, 403, error.message);
+    }
   }
 };
 

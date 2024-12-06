@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest -i --runTestsByPath",
+    "test": "jest -i --runTestsByPath --coverage",
     "start": "nodemon index.js"
   },
   "keywords": [],
