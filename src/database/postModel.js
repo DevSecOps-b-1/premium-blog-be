@@ -15,9 +15,9 @@ const getPostList = async () => {
         if (contentResult.rows.length > 0) {
           let content = contentResult.rows[0].content;
 
-          // Extract 10% of the content and clean it up
+          // Trim content to a maximum of 183 characters and clean it up
           const trimmedContent = content
-            .slice(0, Math.ceil(content.length * 0.1)) // Get 10% of content
+            .slice(0, 183) // Limit to 183 characters
             .replace(/[\s,]+$/, ""); // Remove trailing whitespaces or symbols
 
           return { ...post, content: trimmedContent };
