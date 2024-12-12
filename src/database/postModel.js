@@ -3,9 +3,30 @@ const pool = require("./db");
 // Get Post List
 const getPostList = async () => {
   try {
-    const query = `SELECT * FROM posts`;
+    const query = `SELECT id, title, is_premium, created_at FROM posts`;
     const result = await pool.query(query);
-    return result.rows;
+
+    // Process each post to add trimmed content
+    const posts = await Promise.all(
+      result.rows.map(async (post) => {
+        const contentQuery = `SELECT content FROM posts WHERE id = $1`;
+        const contentResult = await pool.query(contentQuery, [post.id]);
+
+        if (contentResult.rows.length > 0) {
+          let content = contentResult.rows[0].content;
+
+          // Extract 10% of the content and clean it up
+          const trimmedContent = content
+            .slice(0, Math.ceil(content.length * 0.1)) // Get 10% of content
+            .replace(/[\s,]+$/, ""); // Remove trailing whitespaces or symbols
+
+          return { ...post, content: trimmedContent };
+        }
+        return post;
+      })
+    );
+
+    return posts;
   } catch (error) {
     console.log("get post list failed");
     console.log(error);
