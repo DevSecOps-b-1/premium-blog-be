@@ -4,7 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest -i --runTestsByPath --coverage",
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "staging": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
